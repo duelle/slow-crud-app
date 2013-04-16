@@ -14,12 +14,16 @@ public abstract class Job implements Runnable {
 
     @Override
     public void run() {
-        while(exercise.isRunning()) {
-            try {
-                runJob();
-            } catch (Exception e) {
-                // Deliberatly ignored
+        try {
+            while(exercise.isRunning()) {
+                try {
+                    runJob();
+                } catch (Exception e) {
+                    // Deliberatly ignored
+                }
             }
+        } finally {
+            hadOneDismissal.close();
         }
     }
 
