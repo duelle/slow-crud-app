@@ -5,12 +5,15 @@ package com.jclarity.had_one_dismissal.exercises;
 import com.jclarity.had_one_dismissal.Exercise;
 import com.jclarity.had_one_dismissal.api.CreateCompanyAndJob;
 import com.jclarity.had_one_dismissal.api.DeleteCompanyAndJob;
+import com.jclarity.had_one_dismissal.api.HadOneDismissal;
 
 /**
  * Performs two tasks, creating job/company listing then deleting it
  *
  */
 public abstract class CompanyAndJobExercise extends Exercise {
+
+    protected final HadOneDismissal hadOneDismissalApi = new HadOneDismissal();
 
     private final int enqueueJobsCount;
     private final int deleteJobsCount;

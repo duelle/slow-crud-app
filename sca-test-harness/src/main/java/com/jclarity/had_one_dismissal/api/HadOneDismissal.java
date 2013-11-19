@@ -15,14 +15,9 @@ import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.base.Suppliers;
-import com.google.common.io.CharStreams;
-import com.google.common.io.Closeables;
-import com.google.common.io.InputSupplier;
+public class HadOneDismissal {
 
-public class HadOneDismissalApi implements Closeable {
-
-    private static Logger LOGGER = LoggerFactory.getLogger(HadOneDismissalApi.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(HadOneDismissal.class);
 
     public static String HOST = System.getProperty("jclarity.hod.host", "127.0.0.1");
 
@@ -34,14 +29,13 @@ public class HadOneDismissalApi implements Closeable {
     private static String LOGIN_URL       = URL + "resources/j_spring_security_check";
     private static String LOGOUT_URL      = URL + "resources/j_spring_security_logout";
     private static String POPULATE_DB     = URL + "populate/index";
+    private static String SEARCH          = URL + "search/index";
 
     private final BasicCookieStore cookies;
 
     private final Executor executor;
 
-    private DefaultHttpClient httpClient;
-
-    public HadOneDismissalApi() {
+    public HadOneDismissal() {
         this.cookies = new BasicCookieStore();
         httpClient = new DefaultHttpClient();
         this.executor = Executor.newInstance(httpClient)
@@ -78,14 +72,18 @@ public class HadOneDismissalApi implements Closeable {
         execute(request);
     }
 
-    public void logout() throws ClientProtocolException, IOException {
+    public void logout() throws IOException {
         LOGGER.debug("logout");
         execute(Request.Get(LOGOUT_URL));
     }
 
-    public void populateDb() throws ClientProtocolException, IOException {
+    public void populateDb() throws IOException {
         LOGGER.debug("populateDb");
         execute(Request.Get(POPULATE_DB));
+    }
+    
+    public void searchIndex() throws IOException {
+        execute(Request.Get(SEARCH));
     }
 
     private void execute(Request request) throws ClientProtocolException, IOException {
