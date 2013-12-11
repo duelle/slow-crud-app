@@ -1,4 +1,4 @@
-package com.jclarity.had_one_dismissal.record;
+package com.jclarity.had_one_dismissal.monitoring;
 
 import com.gs.collections.api.list.primitive.LongList;
 import com.gs.collections.api.list.primitive.MutableLongList;
