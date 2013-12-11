@@ -1,7 +1,6 @@
 package com.jclarity.had_one_dismissal;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -12,8 +11,10 @@ import com.jclarity.crud_common.api.AuthServicePerformanceVariablesMXBean;
 import com.jclarity.crud_common.api.PerformanceProblemsMXBean;
 import com.jclarity.had_one_dismissal.jmx.AuthServiceJMXConnection;
 import com.jclarity.had_one_dismissal.jmx.PerformanceProblemsJMXConnection;
-import com.jclarity.had_one_dismissal.record.Recorder;
-import com.jclarity.had_one_dismissal.record.TimingStatistics;
+import com.jclarity.had_one_dismissal.monitoring.Recorder;
+import com.jclarity.had_one_dismissal.monitoring.ResponseRecorder;
+import com.jclarity.had_one_dismissal.monitoring.StatusCodeRecorder;
+import com.jclarity.had_one_dismissal.monitoring.TimingStatistics;
 
 public abstract class Exercise {
 
@@ -28,6 +29,7 @@ public abstract class Exercise {
     private final AuthServiceJMXConnection authJmxConnection;
     
     private Recorder recorder;
+    private ResponseRecorder responseRecorder;
 
     protected volatile boolean isRunning = true;
 
@@ -53,6 +55,8 @@ public abstract class Exercise {
         return (Exercise) type.getConstructors()[0]
                               .newInstance((Object[]) arguments);
     }
+    
+    
 
     public Exercise() {
         this(Runtime.getRuntime().availableProcessors());
@@ -68,6 +72,7 @@ public abstract class Exercise {
         authJmxConnection = new AuthServiceJMXConnection();
         authServicePerformanceVariables = authJmxConnection.getAuthServicePerformanceVariables();
         recorder = new Recorder();
+        responseRecorder = new StatusCodeRecorder();
     }
 
     protected void stop() {
@@ -88,6 +93,7 @@ public abstract class Exercise {
             appJmxConnection.close();
             authJmxConnection.close();
         }
+        responseRecorder.report();
         LOGGER.info("STOPPED @ " + System.currentTimeMillis());
     }
 
@@ -122,4 +128,7 @@ public abstract class Exercise {
         return recorder;
     }
 
+    public ResponseRecorder getResponseRecorder() {
+        return responseRecorder;
+    }
 }

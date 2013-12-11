@@ -1,16 +1,17 @@
 package com.jclarity.had_one_dismissal.api;
 
 import com.jclarity.had_one_dismissal.Exercise;
-import com.jclarity.had_one_dismissal.record.Stopwatch;
+import com.jclarity.had_one_dismissal.monitoring.Stopwatch;
 
 public abstract class Job implements Runnable {
 
-    protected HadOneDismissal hadOneDismissal = new HadOneDismissal();
+    protected final HadOneDismissal hadOneDismissal;
 
     protected final Exercise exercise;
 
     public Job(Exercise exercise) {
         this.exercise = exercise;
+        hadOneDismissal = new HadOneDismissal(exercise.getResponseRecorder());
     }
 
     @Override
@@ -25,8 +26,6 @@ public abstract class Job implements Runnable {
             } finally {
                 stopwatch.stop();
             }
-        } finally {
-            hadOneDismissal.close();
         }
     }
 
