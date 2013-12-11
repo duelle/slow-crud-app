@@ -75,7 +75,7 @@ public class CompanyAndJobController {
         } else {
             persist(company, job);
         }
-        return index(uiModel);
+        return "index";
     }
 
     private void persist(Company company, JobListing job) {

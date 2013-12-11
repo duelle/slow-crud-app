@@ -64,7 +64,8 @@ public class JettyConfigurationEditor {
     }
     
     private <T> Optional<T> withLines(Function<String, Optional<T>> handler) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(relativeJettyXml))) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(relativeJettyXml));
             String line;
             while ((line=reader.readLine()) != null) {
                 Optional<T> result = handler.apply(line);
@@ -93,7 +94,8 @@ public class JettyConfigurationEditor {
             }
         });
         
-        try(PrintWriter writer = new PrintWriter(relativeJettyXml)) {
+        try {
+            PrintWriter writer = new PrintWriter(relativeJettyXml);
             for (String line : result) {
                 writer.write(line);
                 writer.write('\n');
