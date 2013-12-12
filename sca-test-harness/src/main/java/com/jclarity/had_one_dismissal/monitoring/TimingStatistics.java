@@ -3,12 +3,18 @@ package com.jclarity.had_one_dismissal.monitoring;
 public class TimingStatistics {
 
     private static final long NS_IN_MS = 1000;
+
+    private static final long UNKNOWN = -1;
     
     private final double mean;
     private final long fiftiethPercentile;
     private final long ninetiethPercentile;
     private final long ninetyninthPercentile;
     private final long worst;
+    
+    public static TimingStatistics unknown() {
+        return new TimingStatistics(UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN);
+    }
 
     public TimingStatistics(double mean, long fiftiethPercentile,
             long ninetiethPercentile, long ninetyninthPercentile, long worst) {

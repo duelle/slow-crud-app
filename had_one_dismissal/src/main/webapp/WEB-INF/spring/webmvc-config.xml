@@ -74,5 +74,5 @@
             </list>
         </property>
     </bean>
-<bean class="com.jclarity.had_one_dismissal.web.ApplicationConversionServiceFactoryBean" id="applicationConversionService"/>
+    <bean class="com.jclarity.had_one_dismissal.web.ApplicationConversionServiceFactoryBean" id="applicationConversionService"/>
 </beans>

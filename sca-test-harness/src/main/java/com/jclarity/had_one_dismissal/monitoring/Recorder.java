@@ -31,6 +31,10 @@ public class Recorder {
     }
 
     private TimingStatistics calculateStats(MutableLongList timings) {
+        if (timings.isEmpty()) {
+            return TimingStatistics.unknown();
+        }
+        
         timings.sortThis();
         
         return new TimingStatistics(timings.average(),

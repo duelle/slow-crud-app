@@ -1,5 +1,9 @@
 package com.jclarity.had_one_dismissal;
 
+import static com.jclarity.crud_common.api.PerformanceProblemsMXBean.DEFAULT_DATABASE_TYPE;
+import static com.jclarity.crud_common.api.PerformanceProblemsMXBean.DEFAULT_DEADLOCK_ENABLED;
+import static com.jclarity.crud_common.api.PerformanceProblemsMXBean.DEFAULT_SAVING_LOADED_DATA;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -39,6 +43,7 @@ public abstract class Exercise {
             Class<? extends Exercise> type = (Class<? extends Exercise>) Class.forName(clazzName);
             if (type != null) {
                 Exercise exercise = newInstance(type, arguments);
+                exercise.resetMXBeans();
                 exercise.runExercise(timeLimitInMs);
             }
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
@@ -56,8 +61,6 @@ public abstract class Exercise {
                               .newInstance((Object[]) arguments);
     }
     
-    
-
     public Exercise() {
         this(Runtime.getRuntime().availableProcessors());
     }
@@ -73,6 +76,14 @@ public abstract class Exercise {
         authServicePerformanceVariables = authJmxConnection.getAuthServicePerformanceVariables();
         recorder = new Recorder();
         responseRecorder = new StatusCodeRecorder();
+    }
+    
+    public void resetMXBeans() {
+        // TODO: push this inside PerformanceProblemsMXBean
+        performanceProblems.setSavingLoadedData(DEFAULT_SAVING_LOADED_DATA);
+        performanceProblems.setDeadlockEnabled(DEFAULT_DEADLOCK_ENABLED);
+        performanceProblems.setSavingLoadedData(DEFAULT_SAVING_LOADED_DATA);
+        performanceProblems.setDatabaseType(DEFAULT_DATABASE_TYPE);
     }
 
     protected void stop() {

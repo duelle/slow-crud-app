@@ -22,11 +22,10 @@ public class PerformanceProblems extends JMXComponent implements PerformanceProb
 
     public PerformanceProblems() throws Exception {
         register(ADDRESS);
-        setSavingLoadedData(true);
-        deadlockEnabled = true;
-        savingDBQueries = true;
-        savingLoadedData = true;
-        database = Database.IN_MEMORY;
+        setSavingLoadedData(DEFAULT_SAVING_LOADED_DATA);
+        setDeadlockEnabled(DEFAULT_DEADLOCK_ENABLED);
+        setSavingLoadedData(DEFAULT_SAVING_LOADED_DATA);
+        setDatabaseType(DEFAULT_DATABASE_TYPE);
     }
 
     @Override
@@ -38,7 +37,7 @@ public class PerformanceProblems extends JMXComponent implements PerformanceProb
     public void setDeadlockEnabled(boolean enabled) {
         deadlockEnabled = enabled;
     }
-
+    
     @Override
     public boolean isSavingDBQueries() {
         return savingDBQueries;

@@ -1,0 +1,9 @@
+com.jclarity.had_one_dismissal.exercises.CpuLoadExercise,60000,20
+com.jclarity.had_one_dismissal.exercises.ExternalWebAppExercise,60000,100
+com.jclarity.had_one_dismissal.exercises.SingleThreadedExercise,60000,1
+
+# Logging is Context Switching + Interrupt Processing
+com.jclarity.had_one_dismissal.exercises.LoggingLoadExercise,60000,8
+
+# Context Switching + Disk
+com.jclarity.had_one_dismissal.exercises.InterprocessContextSwitchingExercise,60000,100,100

@@ -3,6 +3,11 @@ package com.jclarity.crud_common.api;
 public interface PerformanceProblemsMXBean {
 
     public static final String ADDRESS = "com.jclarity.had_one_dismissal:type=PerformanceProblems";
+    
+    public static final boolean DEFAULT_SAVING_LOADED_DATA = true;
+    public static final boolean DEFAULT_DEADLOCK_ENABLED = true;
+    public static final boolean DEFAULT_SAVING_DB_QUERIES = true;
+    public static final Database DEFAULT_DATABASE_TYPE = Database.IN_MEMORY;
 
     public boolean isDeadlockEnabled();
 
