@@ -56,7 +56,8 @@ public class PerformanceProblems extends JMXComponent implements PerformanceProb
     @Override
     public void setDatabaseType(Database database) {
         this.database = database;
-        entityManagerFactory.afterPropertiesSet();
+        if (entityManagerFactory != null)
+            entityManagerFactory.afterPropertiesSet();
     }
 
     @Override
