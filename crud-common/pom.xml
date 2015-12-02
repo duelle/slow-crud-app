@@ -9,14 +9,14 @@
         <version>0.1.0.BUILD-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    
+
     <groupId>com.jclarity.had_one_dismissal</groupId>
     <artifactId>crud_common</artifactId>
     <packaging>jar</packaging>
 
     <name>Crud Common</name>
     <description>Common code for slow crud app</description>
-    
+
     <properties>
       <maven.compiler.source>1.6</maven.compiler.source>
       <maven.compiler.target>1.6</maven.compiler.target>
