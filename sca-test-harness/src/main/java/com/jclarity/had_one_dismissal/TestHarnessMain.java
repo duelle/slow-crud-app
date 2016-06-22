@@ -1,9 +1,6 @@
 package com.jclarity.had_one_dismissal;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
@@ -37,7 +34,7 @@ public class TestHarnessMain {
         }
         
         if (cmd.hasOption("f")) {
-            runFromCsv(new FileInputStream(cmd.getOptionValue("f")));
+            runFromCsv(new FileInputStream(cmd.getOptionValue("f").trim()));
         } else if (cmd.hasOption("c")) {
             String exercise = cmd.getOptionValue("c");
             long timeLimit = Long.parseLong(cmd.getOptionValue("t"));
