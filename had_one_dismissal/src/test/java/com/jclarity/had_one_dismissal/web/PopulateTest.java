@@ -8,6 +8,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -33,6 +34,7 @@ public class PopulateTest {
     @Autowired private Populate populate;
 
     @Test
+    @Ignore
     public void loadsDataFromFiles() throws Exception {
         LOGGER.info("Populate Test");
         long total = System.currentTimeMillis();
