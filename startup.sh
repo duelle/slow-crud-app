@@ -1,6 +1,14 @@
 #!/bin/bash
 
-mvn clean install
+echo "NOTE: This will only work if you are running Java 7."
+echo ""
+echo "You are running:"
+java -version
+echo ""
+read -p "Press <ENTER> to continue.." 
+
+mvn clean install || echo "mvn clean install failed." && exit 1
+
 
 unset MAVEN_OPTS
 
